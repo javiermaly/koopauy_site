@@ -7,6 +7,8 @@
     <meta name="author" content="">
 
     <title>Javier Maly's vCard</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -17,6 +19,54 @@
     
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+
+    <style type="text/css">   
+ 
+ .w3_whatsapp_btn {
+    background-image: url('icon.png');
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline-block !important;
+    position: relative;
+    font-family: Arial,sans-serif;
+    letter-spacing: .4px;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: none;
+    color: #fff;
+    border-radius: 2px;
+    background-color: #5cbe4a;
+    background-repeat: no-repeat;
+    line-height: 1.2;
+    text-decoration: none;
+    text-align: left;
+}
+
+.w3_whatsapp_btn_small {
+    font-size: 12px;
+    background-size: 16px;
+    background-position: 5px 2px;
+    padding: 3px 6px 3px 25px;
+}
+
+.w3_whatsapp_btn_medium {
+    font-size: 16px;
+    background-size: 20px;
+    background-position: 4px 2px;
+    padding: 4px 6px 4px 30px;
+}
+
+.w3_whatsapp_btn_large {
+    font-size: 16px;
+    background-size: 20px;
+    background-position: 5px 5px;
+    padding: 8px 6px 8px 30px;
+    color: #fff;
+}   
+
+a.whatsapp { color: #fff;}
+    
+</style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -107,8 +157,8 @@
 					  </div><!-- /Tab Portfolio -->
 					  
 	    			  <!-- ===== Fourth Tab ===== -->
-					  <div class="tab-pane" id="contact">
-						  <h4>Contact Information</h4>
+					  <div class="tab-pane" id="contact" name="contact">
+						  <h4>Contact information</h4>
 						  <hr>
 						  <div class="row">
 							  <div class="col-xs-6">
@@ -136,6 +186,11 @@
 								  	<i class="icon-linkedin"></i> - uy.linkedin.com/in/javiermaly <br/>
 									<i class="icon-twitter"></i> - @urujand  
 								  </p>
+
+								  <p>
+								   <a data-text="http://koopa.uy/" data-link="http://koopa.uy/" class="whatsapp w3_whatsapp_btn w3_whatsapp_btn_large">Share</a>
+
+								  </p>
 								 
 							  </div><!-- col-xs-6 -->
 						  </div><!-- row -->
@@ -159,6 +214,62 @@
 	  $(this).tab('show')
 	})	
 	</script>    
+
+
+	<script>
+		$(window).load(function() { 
+
+		    // cache the id
+		    var navbox = $('.nav-tabs');
+
+		    // activate tab on click
+		    navbox.on('click', 'a', function (e) {
+		      var $this = $(this);
+		      // prevent the Default behavior
+		      e.preventDefault();
+		      // send the hash to the address bar
+		      window.location.hash = $this.attr('href');
+		      // activate the clicked tab
+		      $this.tab('show');
+		    });
+
+		    // will show tab based on hash
+		    function refreshHash() {
+		      navbox.find('a[href="'+window.location.hash+'"]').tab('show');
+		    }
+
+		    // show tab if hash changes in address bar
+		    $(window).bind('hashchange', refreshHash);
+
+		    // read has from address bar and show it
+		    if(window.location.hash) {
+		      // show tab on load
+		      refreshHash();
+		    }
+
+		});
+</script>
+
+	<script type="text/javascript">
+
+$(document).ready(function() {
+
+    $(document).on("click",'.whatsapp',function() {
+
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+        var text = $(this).attr("data-text");
+        var url = $(this).attr("data-link");
+        var message = encodeURIComponent(text)+" - "+encodeURIComponent(url);
+        var whatsapp_url = "whatsapp://send?text="+message;
+        window.location.href= whatsapp_url;
+} else {
+    alert("Please share this article in mobile device");
+}
+
+    });
+});
+</script>
     
   </body>
 </html>
